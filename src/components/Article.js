@@ -1,54 +1,54 @@
 import React, {Component} from 'react'
+import Comment from "./Comment.jsx" 
+import CommentsList from "./CommentsList.jsx"
 
 class Article extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            isOpen: props.defaultOpen
+            isArticleOpen: props.defaultOpen,
+            isCommentsOpen: false
         }
     }
 
-    componentWillMount() {
-        console.log('---', 1)
-    }
-
-    componentDidMount() {
-        console.log('---', 2)
-    }
-
     componentWillReceiveProps(nextProps) {
-        console.log('---', 'receive props :(((')
-
         if (nextProps.defaultOpen !== this.props.defaultOpen) this.setState({
-            isOpen: nextProps.defaultOpen
+            isArticleOpen: nextProps.defaultOpen
         })
     }
-
-    componentWillUpdate() {
-        console.log('---', 'will update')
-    }
-
     render() {
         const {article} = this.props
-        const body = this.state.isOpen && <section>{article.text}</section>
+        const body = this.state.isArticleOpen && <section>{article.text}</section>
         return (
             <div>
                 <h2>
                     {article.title}
-                    <button onClick={this.handleClick}>
-                        {this.state.isOpen ? 'close' : 'open'}
+                    <button onClick={this.handleArticleClick}>
+                        {this.state.isArticleOpen ? 'close' : 'open'}
                     </button>
                 </h2>
                 {body}
+                <h4>
+                    <a 
+                        style={{textDecoration: "underline", cursor: "pointer"}} 
+                        onClick={this.handleCommentsClick}>{this.state.isCommentsOpen ? 'close comments' : 'open comments'}
+                    </a>
+                </h4>
+                {this.state.isCommentsOpen && <ul><CommentsList comments={article.comments} /></ul>}
                 <h3>creation date: {(new Date(article.date)).toDateString()}</h3>
             </div>
         )
     }
 
-    handleClick = () => {
+    handleArticleClick = () => {
         this.setState({
-            isOpen: !this.state.isOpen
+            isArticleOpen: !this.state.isArticleOpen
+        })
+    }
+    handleCommentsClick = () => {
+        this.setState({
+            isCommentsOpen: !this.state.isCommentsOpen
         })
     }
 }
