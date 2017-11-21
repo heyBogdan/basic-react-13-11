@@ -5,7 +5,6 @@ export default class ArticleList extends Component {
     state = {
         openArticleId: null
     }
-
     render() {
         const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
             <Article article = {article}

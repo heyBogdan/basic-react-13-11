@@ -15,7 +15,6 @@ class Article extends PureComponent {
     constructor(props) {
         super(props)
         this.state = {
-
             error: null
         }
     }
@@ -53,6 +52,7 @@ class Article extends PureComponent {
                     {article.title}
                     <button onClick={() => toggleOpen(article.id)}>
                         {isOpen ? 'close' : 'open'}
+
                     </button>
                 </h2>
                 {body}
