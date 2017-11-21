@@ -12,20 +12,18 @@ class Article extends PureComponent {
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
     }
-
     constructor(props) {
         super(props)
-
         this.state = {
+
             error: null
         }
     }
     componentWillReceiveProps(nextProps) {
         if (nextProps.defaultOpen !== this.props.defaultOpen) this.setState({
-            isOpen: nextProps.defaultOpen
+            isArticleOpen: nextProps.defaultOpen
         })
     }
-
     componentDidCatch(err) {
         this.setState({
             error: 'can`t display an article'
@@ -58,6 +56,13 @@ class Article extends PureComponent {
                     </button>
                 </h2>
                 {body}
+                <h4>
+                    <a 
+                        style={{textDecoration: "underline", cursor: "pointer"}} 
+                        onClick={this.handleCommentsClick}>{this.state.isCommentsOpen ? 'close comments' : 'open comments'}
+                    </a>
+                </h4>
+                {this.state.isCommentsOpen && <ul><CommentsList comments={article.comments} /></ul>}
                 <h3>creation date: {(new Date(article.date)).toDateString()}</h3>
             </div>
         )
