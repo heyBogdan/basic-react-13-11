@@ -1,15 +1,17 @@
-import React, {Component} from 'react';
-import Article from './Article';
-import PropTypes from 'prop-types';
-import makeAccordeon from '../decorators/makeAccordeon';
 
-class ArticleList extends Component {
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import Article from './Article'
+import Accordion from './common/Accordion'
+
+class ArticleList extends Accordion {
     render() {
-        console.log(this.props);
-        const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
-            <Article article = {article}
-                     isOpen = {this.props.openArticleId === article.id}
-                     toggleOpen = {this.props.toggleOpenArticle}
+        const {articles} = this.props
+        if (!articles.length) return <h3>No Articles</h3>
+        const articleElements = articles.map((article) => <li key={article.id}>
+            <Article article={article}
+                     isOpen={article.id === this.state.openItemId}
+                     toggleOpen={this.toggleOpenItemMemoized(article.id)}
             />
         </li>)
         return (
@@ -18,13 +20,15 @@ class ArticleList extends Component {
             </ul>
         )
     }
-/*
-
-    toggleOpenArticleWitoutCurr(openArticleId) {
-        this.setState({ openArticleId })
-    }
-*/
-
 }
 
-export default makeAccordeon(ArticleList);
+ArticleList.defaultProps = {
+    articles: []
+}
+
+ArticleList.propTypes = {
+    articles: PropTypes.array.isRequired
+}
+
+export default ArticleList
+
