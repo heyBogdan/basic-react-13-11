@@ -55,7 +55,7 @@ class Article extends PureComponent {
                 <button onClick = {this.increment}>increment</button>
                 <section>{article.text}</section>
                 <CommentList comments = {article.comments}
-                             key = {this.state.counter}/>
+                             key = {this.state.counter}/>[]
             </div>
         )
         return (

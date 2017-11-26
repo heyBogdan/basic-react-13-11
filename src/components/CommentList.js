@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
+import CommentForm from "./CommentForm.jsx";
 
 
 class CommentList extends Component {
@@ -37,6 +38,7 @@ class CommentList extends Component {
         return (
             <div>
                 {body}
+                <CommentForm /> 
             </div>
         )
     }
