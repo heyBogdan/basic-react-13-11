@@ -42,6 +42,7 @@ class Article extends PureComponent {
         })
     }
 /*
+
     shouldComponentUpdate(nextProps, nextState) {
         return !Object.keys(nextProps).every(prop => this.props[prop] === nextProps[prop])
     }
