@@ -15,8 +15,10 @@ class Article extends PureComponent {
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
     }
+
     constructor(props) {
         super(props)
+
         this.state = {
             error: null,
             counter: 0
@@ -24,9 +26,10 @@ class Article extends PureComponent {
     }
     componentWillReceiveProps(nextProps) {
         if (nextProps.defaultOpen !== this.props.defaultOpen) this.setState({
-            isArticleOpen: nextProps.defaultOpen
+            isOpen: nextProps.defaultOpen
         })
     }
+
     componentDidCatch(err) {
         this.setState({
             error: 'can`t display an article'
@@ -39,7 +42,6 @@ class Article extends PureComponent {
         })
     }
 /*
-
     shouldComponentUpdate(nextProps, nextState) {
         return !Object.keys(nextProps).every(prop => this.props[prop] === nextProps[prop])
     }
@@ -55,7 +57,7 @@ class Article extends PureComponent {
                 <button onClick = {this.increment}>increment</button>
                 <section>{article.text}</section>
                 <CommentList comments = {article.comments}
-                             key = {this.state.counter}/>[]
+                             key = {this.state.counter}/>
             </div>
         )
         return (
@@ -64,7 +66,6 @@ class Article extends PureComponent {
                     {article.title}
                     <button onClick={toggleOpen}>
                         {isOpen ? 'close' : 'open'}
-
                     </button>
                 </h2>
                 <CSSTransition

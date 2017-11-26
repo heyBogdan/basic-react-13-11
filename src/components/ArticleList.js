@@ -1,4 +1,3 @@
-
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import Article from './Article'
@@ -21,6 +20,7 @@ class ArticleList extends Accordion {
         )
     }
 }
+
 
 ArticleList.defaultProps = {
     articles: []
